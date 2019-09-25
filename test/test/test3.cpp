@@ -2,7 +2,6 @@
 
 using namespace std;
 
-int max = 0;
 class point {
 public:
 	int x;
@@ -46,6 +45,28 @@ public:
 		point* pDown = down(sp);
 		point* pLeft = left(sp);
 		point* pRight = right(sp);
+		int temp= 0;
+		if(pUp!=nullptr&&values[p2i(sp)]>values[p2i(pUp)]){
+			temp=slip(pUp)+1;
+			if(temp>m)m=temp;
+		}
+		if(pDown!=nullptr&&values[p2i(sp)]>values[p2i(pDown)]){
+                        temp=slip(pDown)+1;
+                        if(temp>m)m=temp;
+                }
+		if(pLeft!=nullptr&&values[p2i(sp)]>values[p2i(pLeft)]){
+                        temp=slip(pLeft)+1;
+                        if(temp>m)m=temp;
+                }
+		if(pRight!=nullptr&&values[p2i(sp)]>values[p2i(pRight)]){
+                        temp=slip(pRight)+1;
+                        if(temp>m)m=temp;
+                }
+		return m;
+
+	}
+	int slip(int i){
+		return slip(i2p(i));
 	}
 	point* up(point* sp) {
 		int t = p2i(sp)-cols;
@@ -72,9 +93,16 @@ public:
 };
 int main() {
 	block b;
+	int temp;
+	int max;
 	while (b.set())
 	{
-
+		max = 0;
+		for(int i=0;i<b.length;i++){
+			temp = b.slip(i);
+			if(temp>max)max=temp;
+		}
+		cout<<max+1<<endl;
 	}
 	return 0;
 }
