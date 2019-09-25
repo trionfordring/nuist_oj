@@ -41,7 +41,11 @@ public:
 		return new point(i % cols,i/cols);
 	}
 	int slip(point* sp) {
-
+		int m = 0;
+		point* pUp = up(sp);
+		point* pDown = down(sp);
+		point* pLeft = left(sp);
+		point* pRight = right(sp);
 	}
 	point* up(point* sp) {
 		int t = p2i(sp)-cols;
@@ -62,8 +66,8 @@ public:
 		return i2p(p2i(sp) - 1);
 	}
 	point* right(point* sp) {
-		if (sp->x <= 0)return nullptr;
-		return i2p(p2i(sp) - 1);
+		if (sp->x>=rows-1)return nullptr;
+		return i2p(p2i(sp) + 1);
 	}
 };
 int main() {
